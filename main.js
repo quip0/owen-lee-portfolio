@@ -1,8 +1,5 @@
-import * as THREE from "three";
-
 const hero = document.querySelector(".hero");
 const menu = document.querySelector("[data-menu]");
-const sceneHost = document.querySelector("[data-scene]");
 const titleHint = document.querySelector("[data-title-hint]");
 const title = document.querySelector("[data-title]");
 const landing = document.querySelector("[data-landing]");
@@ -123,99 +120,9 @@ const animateParticles = () => {
 };
 animateParticles();
 
-/* ── Three.js scene ── */
-if (sceneHost) {
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(32, window.innerWidth / window.innerHeight, 0.1, 100);
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  const pointer = new THREE.Vector2();
-
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.setClearColor(0x000000, 0);
-  sceneHost.append(renderer.domElement);
-
-  camera.position.set(0, 0, 6.4);
-
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
-  const keyLight = new THREE.DirectionalLight(0xfff4dd, 1.2);
-  keyLight.position.set(2.5, 3.5, 5);
-  const rimLight = new THREE.PointLight(0xffffff, 0.65, 12);
-  rimLight.position.set(-3, -1, 2.5);
-  scene.add(ambientLight, keyLight, rimLight);
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  const backdropGeometry = new THREE.PlaneGeometry(7.8, 7.8, 1, 1);
-  const backdropMaterial = new THREE.MeshStandardMaterial({
-    color: 0xf6f1e8,
-    roughness: 0.95,
-    metalness: 0.02,
-  });
-  const backdrop = new THREE.Mesh(backdropGeometry, backdropMaterial);
-  backdrop.position.z = -0.45;
-  group.add(backdrop);
-
-  const roomPlaneGeometry = new THREE.PlaneGeometry(6.3, 6.3);
-  const roomMaterial = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
-    roughness: 0.88,
-    metalness: 0.04,
-  });
-  const roomPlane = new THREE.Mesh(roomPlaneGeometry, roomMaterial);
-  group.add(roomPlane);
-
-  const shadowGeometry = new THREE.CircleGeometry(2.6, 64);
-  const shadowMaterial = new THREE.MeshBasicMaterial({
-    color: 0x000000,
-    transparent: true,
-    opacity: 0.08,
-  });
-  const shadow = new THREE.Mesh(shadowGeometry, shadowMaterial);
-  shadow.scale.set(1.55, 0.42, 1);
-  shadow.position.set(0, -2.05, -0.2);
-  group.add(shadow);
-
-  const resizeScene = () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  };
-
-  let time = 0;
-  const animateScene = () => {
-    time += 0.008;
-    const targetX = pointer.x * 0.14;
-    const targetY = pointer.y * 0.1;
-
-    group.rotation.y += (targetX - group.rotation.y) * 0.04;
-    group.rotation.x += ((-targetY) - group.rotation.x) * 0.04;
-    group.position.x += (pointer.x * 0.18 - group.position.x) * 0.035;
-    group.position.y += (pointer.y * 0.12 - group.position.y) * 0.035;
-
-    /* subtle breathing */
-    const breathe = Math.sin(time) * 0.006;
-    group.scale.setScalar(1 + breathe);
-
-    /* slight ambient light pulsing */
-    ambientLight.intensity = 1.8 + Math.sin(time * 0.7) * 0.08;
-
-    renderer.render(scene, camera);
-    window.requestAnimationFrame(animateScene);
-  };
-
-  window.addEventListener("pointermove", (event) => {
-    pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
-    pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
-  }, { passive: true });
-  window.addEventListener("resize", () => {
-    resizeScene();
-    resizeParticleCanvas();
-  });
-  animateScene();
-}
+window.addEventListener("resize", () => {
+  resizeParticleCanvas();
+});
 
 /* ── Title animation ── */
 if (title) {
@@ -354,7 +261,7 @@ if (hero && menu) {
   const menuItems = [...menu.querySelectorAll("[data-menu-item]")];
   const menuDescriptionPopup = menu.querySelector("[data-menu-description-popup]");
   const menuClose = menu.querySelector("[data-menu-close]");
-  const clickSound = new Audio("/media/audio/click.wav");
+  const clickSound = new Audio(new URL("/media/audio/click.wav", import.meta.url).href);
   let activeIndex = 0;
   let isMenuOpen = false;
   let isAboutActive = false;

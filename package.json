@@ -13,7 +13,5 @@
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.59.0"
   },
-  "dependencies": {
-    "three": "^0.183.2"
-  }
+  "dependencies": {}
 }

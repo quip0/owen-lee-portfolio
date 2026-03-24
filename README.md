@@ -1,8 +1,8 @@
 # Owen Lee — Personal Portfolio
 
-An interactive single-page portfolio built with vanilla JavaScript, and Vite. Features a 3D landing scene, particle effects, and a quantum circuit builder project.
+An interactive single-page portfolio built with vanilla JavaScript and Vite. Features particle effects, interactive animations, and a quantum circuit builder project.
 
-**Live site:** Deployed on Vercel
+**Live site:** Deployed on GitHub Pages
 
 ## Tech Stack
 
@@ -12,7 +12,7 @@ An interactive single-page portfolio built with vanilla JavaScript, and Vite. Fe
 
 ## Sections
 
-- **Landing** — 3D interactive scene with a click-to-continue prompt and floating hero image
+- **Landing** — click-to-continue prompt with floating hero image and particle effects
 - **About** — typewriter bio text, social links (GitHub, Substack), animated text selection
 - **Projects** — navigable menu with description popups and loading transitions
 
@@ -35,11 +35,10 @@ npm run preview    # preview production build
 
 ```
 ├── index.html                 # main page
-├── main.js                    # homepage logic (particles, 3D scene, navigation)
+├── main.js                    # homepage logic (particles, animations, navigation)
 ├── styles.css                 # homepage styles
 ├── projects/
 │   └── qubit-circuit-builder/ # standalone project page
 ├── public/media/              # images and audio assets
-├── vite.config.js
-└── vercel.json
+└── vite.config.js
 ```

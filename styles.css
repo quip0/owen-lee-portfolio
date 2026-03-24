@@ -85,22 +85,6 @@ body {
   overflow: hidden;
 }
 
-.scene {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.scene::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(246, 241, 232, 0.18), rgba(246, 241, 232, 0.58)),
-    radial-gradient(circle at center, transparent 28%, rgba(246, 241, 232, 0.72) 100%);
-  pointer-events: none;
-}
-
 /* ── Vignette ── */
 
 .hero::after {
@@ -829,12 +813,6 @@ body {
 
   .about__copy {
     min-height: 7.8rem;
-  }
-
-  .scene::after {
-    background:
-      linear-gradient(to bottom, rgba(246, 241, 232, 0.22), rgba(246, 241, 232, 0.68)),
-      radial-gradient(circle at center, transparent 18%, rgba(246, 241, 232, 0.74) 100%);
   }
 
   .cursor-glow {
