@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Qubit Circuit Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Onboarding overlay -->
+    <div class="onboarding" id="onboarding" aria-label="Introduction to Qubit Circuit Builder">
+      <div class="onboarding__skip" id="onboarding-skip">
+        press <kbd>Esc</kbd> to skip
+      </div>
+
+      <div class="onboarding__progress">
+        <div class="onboarding__progress-bar" id="onboarding-progress"></div>
+      </div>
+
+      <div class="onboarding__stage" data-stage="0">
+        <p class="onboarding__eyebrow">Welcome to</p>
+        <h1 class="onboarding__title">
+          <span class="onboarding__letter" style="--i:0">Q</span><span class="onboarding__letter" style="--i:1">u</span><span class="onboarding__letter" style="--i:2">b</span><span class="onboarding__letter" style="--i:3">i</span><span class="onboarding__letter" style="--i:4">t</span><span class="onboarding__letter" style="--i:5">&nbsp;</span><span class="onboarding__letter" style="--i:6">C</span><span class="onboarding__letter" style="--i:7">i</span><span class="onboarding__letter" style="--i:8">r</span><span class="onboarding__letter" style="--i:9">c</span><span class="onboarding__letter" style="--i:10">u</span><span class="onboarding__letter" style="--i:11">i</span><span class="onboarding__letter" style="--i:12">t</span><span class="onboarding__letter" style="--i:13">&nbsp;</span><span class="onboarding__letter" style="--i:14">B</span><span class="onboarding__letter" style="--i:15">u</span><span class="onboarding__letter" style="--i:16">i</span><span class="onboarding__letter" style="--i:17">l</span><span class="onboarding__letter" style="--i:18">d</span><span class="onboarding__letter" style="--i:19">e</span><span class="onboarding__letter" style="--i:20">r</span>
+        </h1>
+        <p class="onboarding__subtitle">A visual sandbox for quantum circuits</p>
+      </div>
+
+      <div class="onboarding__stage" data-stage="1">
+        <div class="onboarding__card">
+          <div class="onboarding__icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <line x1="8" y1="16" x2="40" y2="16" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="8" y1="24" x2="40" y2="24" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="8" y1="32" x2="40" y2="32" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="14" y="11" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <text x="19" y="19" text-anchor="middle" fill="currentColor" font-size="7" font-family="Space Grotesk">H</text>
+              <circle cx="30" cy="16" r="3" fill="currentColor"/>
+              <line x1="30" y1="19" x2="30" y2="24" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="30" cy="24" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <line x1="26" y1="24" x2="34" y2="24" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="30" y1="20" x2="30" y2="28" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h2 class="onboarding__heading">What is this?</h2>
+          <p class="onboarding__body">
+            Write quantum circuits using <strong>Qiskit Python</strong> syntax and instantly see them rendered as interactive diagrams. Supports all standard gates &mdash; from single-qubit <em>H</em>, <em>X</em>, <em>Z</em> to multi-qubit <em>CX</em>, <em>CCX</em>, <em>SWAP</em>, and parametric gates like <em>RX(&theta;)</em>.
+          </p>
+        </div>
+      </div>
+
+      <div class="onboarding__stage" data-stage="2">
+        <div class="onboarding__card">
+          <div class="onboarding__icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="6" y="8" width="36" height="32" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <line x1="6" y1="14" x2="42" y2="14" stroke="currentColor" stroke-width="1.5"/>
+              <text x="12" y="24" fill="currentColor" font-size="6.5" font-family="monospace">qc.h(0)</text>
+              <text x="12" y="32" fill="currentColor" font-size="6.5" font-family="monospace" opacity="0.5">qc.cx(0,1)</text>
+            </svg>
+          </div>
+          <h2 class="onboarding__heading">Write or load code</h2>
+          <p class="onboarding__body">
+            Type Qiskit code directly into the editor, or choose from <strong>five built-in examples</strong> &mdash; Teleportation, Superdense Coding, GHZ State, Phase Estimation, and Parameterized C-Phase. The syntax highlighting helps you catch errors as you type.
+          </p>
+        </div>
+      </div>
+
+      <div class="onboarding__stage" data-stage="3">
+        <div class="onboarding__card">
+          <div class="onboarding__icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="6" y="10" width="36" height="28" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <path d="M16 24 L22 18 L28 26 L32 22 L38 30 L10 30 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <circle cx="14" cy="18" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <path d="M40 16 L44 12 M40 12 L44 16" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h2 class="onboarding__heading">Live preview</h2>
+          <p class="onboarding__body">
+            The circuit diagram updates <strong>in real time</strong> as you edit. Drag to pan around the circuit and pinch or scroll to zoom in &mdash; up to 6x magnification. Mathematical expressions like <em>&theta;/&pi;</em> render beautifully with LaTeX.
+          </p>
+        </div>
+      </div>
+
+      <div class="onboarding__stage" data-stage="4">
+        <div class="onboarding__ready">
+          <div class="onboarding__pulse"></div>
+          <h2 class="onboarding__heading onboarding__heading--final">Ready to build</h2>
+          <p class="onboarding__body onboarding__body--final">
+            Your quantum workspace is loading&hellip;
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <main class="simple-page">
+      <a class="simple-page__back" href="../../index.html?view=menu">back</a>
+      <h1 class="simple-page__title">Qubit Circuit Builder</h1>
+      <section class="builder" aria-label="Qubit circuit builder">
+        <div class="code-shell" data-code-shell>
+          <div class="code-shell__toolbar">
+            <div class="builder__tabs" role="tablist" aria-label="Qubit circuit builder views">
+              <button
+                id="tab-code"
+                class="builder__tab"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="panel-code"
+                data-tab-trigger
+              >
+                Qiskit
+              </button>
+            </div>
+          </div>
+
+          <div class="code-shell__body" id="code-shell-body">
+            <section class="builder-examples" aria-label="Example circuits">
+              <div class="builder-examples__header">
+                <p class="builder-examples__eyebrow">Examples</p>
+                <p class="builder-examples__copy">Load a circuit to preview it, or start from scratch.</p>
+              </div>
+              <div class="builder-examples__list">
+                <button class="builder-examples__button" type="button" data-example="teleportation">
+                  Teleportation
+                </button>
+                <button class="builder-examples__button" type="button" data-example="superdense-coding">
+                  Superdense Coding
+                </button>
+                <button class="builder-examples__button" type="button" data-example="ghz-state">
+                  GHZ State
+                </button>
+                <button class="builder-examples__button" type="button" data-example="phase-estimation">
+                  Phase Estimation
+                </button>
+                <button class="builder-examples__button" type="button" data-example="parameterized-cphase">
+                  Parameterized C-Phase
+                </button>
+              </div>
+            </section>
+
+            <section
+              id="panel-code"
+              class="builder__panel"
+              role="tabpanel"
+              aria-labelledby="tab-code"
+              data-tab-panel
+            >
+              <div class="code-editor" data-code-editor>
+                <div class="code-editor__body">
+                  <div class="code-editor__lines" aria-hidden="true" data-line-numbers>1</div>
+                  <label class="code-editor__input-wrap" for="circuit-code">
+                    <span class="sr-only">Circuit code editor</span>
+                    <pre class="code-editor__highlight" aria-hidden="true"><code data-code-highlight></code></pre>
+                    <textarea
+                      id="circuit-code"
+                      class="code-editor__input"
+                      name="circuit-code"
+                      spellcheck="false"
+                      autocomplete="off"
+                      autocapitalize="off"
+                      placeholder="# Paste Qiskit code here or load an example above"
+                      wrap="off"
+                      data-code-input
+                    ></textarea>
+                  </label>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <aside class="circuit-preview" aria-label="Live quantum circuit preview">
+          <div class="circuit-preview__header">
+            <p class="circuit-preview__eyebrow">Live Visual</p>
+            <h2 class="circuit-preview__title">Circuit</h2>
+            <p class="circuit-preview__copy" data-circuit-summary>
+              Qiskit code updates the circuit in real time.
+            </p>
+          </div>
+          <div class="circuit-preview__surface">
+            <div class="circuit-preview__empty" data-circuit-empty hidden>
+            </div>
+            <div class="circuit-preview__canvas" data-circuit-canvas></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script>
+      window.MathJax = {
+        startup: {
+          typeset: false,
+        },
+        svg: {
+          fontCache: "none",
+        },
+      };
+    </script>
+    <script defer data-mathjax src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

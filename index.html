@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Owen Lee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="hero">
+      <div class="scene" data-scene aria-hidden="true"></div>
+      <section class="landing" data-landing>
+        <img
+          class="landing__interactable"
+          src="/media/images/home/interactable.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="hero__content">
+          <p class="hero__hint" data-title-hint>*click to continue*</p>
+          <h1 class="hero__title" data-title data-text="by owen lee">hello</h1>
+        </div>
+      </section>
+      <section class="about" data-about aria-hidden="true">
+        <div class="about__inner">
+          <div class="about__selection" data-about-selection aria-hidden="true"></div>
+          <div class="about__text" data-about-text>
+            <p class="about__eyebrow">About Me</p>
+            <h2 class="about__title">Who am I</h2>
+            <div
+              class="about__copy"
+              data-about-copy
+              data-copy-text="My name is Owen Lee, and I'm currently a highschool student studying Quantum Mechanics and Computing."
+            ></div>
+            <div
+              class="about__copy"
+              data-about-copy
+              data-copy-text="This website is meant to be a place where I can share my projects to anyone and everyone interested in the field. I'm documenting the research and my learning process on my github."
+            ></div>
+          </div>
+          <div class="about__spacer" aria-hidden="true"></div>
+          <div class="about__socials">
+            <a
+              class="about__social-link"
+              href="https://github.com/OwenQuipo"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit Owen Lee's GitHub profile"
+            >
+              <img class="about__social-logo" src="/media/images/home/glogo.png" alt="" aria-hidden="true" />
+            </a>
+            <a
+              class="about__social-link"
+              href="https://quip0.substack.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit Owen Lee's Substack"
+            >
+              <img class="about__social-logo about__social-logo--substack" src="/media/images/home/substacklogo.png" alt="" aria-hidden="true" />
+            </a>
+            <img class="about__social-plug" src="/media/images/home/ssplug.png" alt="" aria-hidden="true" />
+          </div>
+          <button class="about__menu-button" type="button" data-menu-trigger tabindex="-1" aria-hidden="true">
+            click here to see projects :)
+          </button>
+        </div>
+      </section>
+      <section class="menu" data-menu aria-hidden="true">
+        <img class="menu__hover-art" src="/media/images/home/hover.png" alt="" aria-hidden="true" />
+        <div class="menu__panel">
+          <button class="menu__close" type="button" data-menu-close aria-label="Close menu">x</button>
+          <div
+            class="menu__item"
+            data-menu-item
+            data-menu-path="./projects/qubit-circuit-builder/index.html"
+            data-menu-description="A visual sandbox for arranging qubits and gates into simple quantum circuits."
+          >
+            Qubit Circuit Builder
+          </div>
+          <div class="menu__item" data-menu-item data-menu-description="Placeholder description for the second project card.">
+            placeholder two
+          </div>
+          <div class="menu__item" data-menu-item data-menu-description="Placeholder description for the third project card.">
+            placeholder three
+          </div>
+          <div class="menu__description" data-menu-description-popup aria-hidden="true"></div>
+        </div>
+      </section>
+      <section class="loading-screen" data-loading-screen aria-hidden="true">
+        <pre class="loading-screen__ascii" data-loading-ascii>[    ]</pre>
+        <div class="loading-screen__bar"><div class="loading-screen__bar-fill"></div></div>
+        <p class="loading-screen__label">opening project</p>
+      </section>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
