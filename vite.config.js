@@ -16,6 +16,10 @@ export default defineConfig({
           __dirname,
           "projects/qubit-circuit-builder/index.html"
         ),
+        errorNoiseSimulator: resolve(
+          __dirname,
+          "projects/error-noise-simulator/index.html"
+        ),
       },
     },
   },

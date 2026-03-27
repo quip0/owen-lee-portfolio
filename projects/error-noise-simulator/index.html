@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error & Noise Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Loading overlay — terminal boot sequence -->
+    <div class="boot" data-loading-overlay>
+      <pre class="boot__log" data-boot-log></pre>
+      <span class="boot__cursor">_</span>
+    </div>
+
+    <!-- Scanline overlay -->
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <main class="term">
+      <div class="term__titlebar">
+        <span class="term__dots">
+          <span class="term__dot term__dot--red"></span>
+          <span class="term__dot term__dot--yellow"></span>
+          <span class="term__dot term__dot--green"></span>
+        </span>
+        <span class="term__titlebar-text">qnoise v0.1.0 &mdash; error &amp; noise simulator</span>
+      </div>
+
+      <div class="term__body">
+        <div class="term__topbar">
+          <a class="term__link" href="../../index.html?view=menu">[ESC] back</a>
+          <span class="term__prompt" data-status-line>READY</span>
+        </div>
+
+        <div class="term__grid" data-simulator>
+          <!-- ══ Left column: Controls ══ -->
+          <div class="term__col">
+
+            <!-- Channel selector -->
+            <div class="term__box">
+              <div class="term__box-header">&#9484;&#9472; CHANNEL &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</div>
+              <div class="term__box-body" data-channel-selector>
+                <button class="term__option" type="button" data-channel="bit-flip" aria-pressed="true">
+                  <span class="term__option-marker" aria-hidden="true"></span> bit-flip
+                </button>
+                <button class="term__option" type="button" data-channel="phase-flip" aria-pressed="false">
+                  <span class="term__option-marker" aria-hidden="true"></span> phase-flip
+                </button>
+                <button class="term__option" type="button" data-channel="depolarizing" aria-pressed="false">
+                  <span class="term__option-marker" aria-hidden="true"></span> depolarizing
+                </button>
+                <button class="term__option" type="button" data-channel="amplitude-damping" aria-pressed="false">
+                  <span class="term__option-marker" aria-hidden="true"></span> amplitude-damping
+                </button>
+              </div>
+              <div class="term__box-footer">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+            </div>
+
+            <!-- Parameter slider -->
+            <div class="term__box">
+              <div class="term__box-header">&#9484;&#9472; PARAM &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</div>
+              <div class="term__box-body">
+                <p class="term__label"><span data-param-label>p</span> = <span class="term__val" data-param-value>0.00</span></p>
+                <div class="term__slider-row">
+                  <span class="term__slider-cap">0</span>
+                  <input
+                    type="range"
+                    class="term__slider"
+                    data-param-slider
+                    min="0" max="1" step="0.01" value="0"
+                  />
+                  <span class="term__slider-cap">1</span>
+                </div>
+                <pre class="term__slider-ascii" data-slider-ascii>|====================|</pre>
+              </div>
+              <div class="term__box-footer">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+            </div>
+
+            <!-- Initial state -->
+            <div class="term__box">
+              <div class="term__box-header">&#9484;&#9472; STATE &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</div>
+              <div class="term__box-body" data-state-selector>
+                <button class="term__option term__option--inline" type="button" data-state="0" aria-pressed="true">
+                  <span class="term__option-marker" aria-hidden="true"></span> |0>
+                </button>
+                <button class="term__option term__option--inline" type="button" data-state="1" aria-pressed="false">
+                  <span class="term__option-marker" aria-hidden="true"></span> |1>
+                </button>
+                <button class="term__option term__option--inline" type="button" data-state="+" aria-pressed="false">
+                  <span class="term__option-marker" aria-hidden="true"></span> |+>
+                </button>
+                <button class="term__option term__option--inline" type="button" data-state="-" aria-pressed="false">
+                  <span class="term__option-marker" aria-hidden="true"></span> |->
+                </button>
+              </div>
+              <div class="term__box-footer">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+            </div>
+
+            <!-- Density matrix -->
+            <div class="term__box">
+              <div class="term__box-header">&#9484;&#9472; DENSITY MATRIX &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</div>
+              <div class="term__box-body">
+                <pre class="term__matrix" data-density-matrix>  loading...</pre>
+              </div>
+              <div class="term__box-footer">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+            </div>
+
+            <!-- Kraus operators -->
+            <div class="term__box">
+              <div class="term__box-header">&#9484;&#9472; KRAUS OPERATORS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</div>
+              <div class="term__box-body">
+                <pre class="term__kraus" data-kraus-display>  loading...</pre>
+              </div>
+              <div class="term__box-footer">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+            </div>
+          </div>
+
+          <!-- ══ Right column: Visualizations ══ -->
+          <div class="term__col">
+
+            <!-- Bloch sphere -->
+            <div class="term__box">
+              <div class="term__box-header">&#9484;&#9472; BLOCH SPHERE &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</div>
+              <div class="term__box-body term__box-body--center">
+                <canvas data-bloch-canvas width="400" height="400"></canvas>
+              </div>
+              <div class="term__box-footer">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+            </div>
+
+            <!-- Metrics chart -->
+            <div class="term__box">
+              <div class="term__box-header">&#9484;&#9472; METRICS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</div>
+              <div class="term__box-body">
+                <svg data-metrics-svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet"></svg>
+                <div class="term__legend">
+                  <span class="term__legend-item" style="color: var(--color-fidelity)">--- fidelity</span>
+                  <span class="term__legend-item" style="color: var(--color-purity)">--- purity</span>
+                  <span class="term__legend-item" style="color: var(--color-entropy)">--- entropy</span>
+                </div>
+              </div>
+              <div class="term__box-footer">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+            </div>
+
+            <!-- Probabilities -->
+            <div class="term__box">
+              <div class="term__box-header">&#9484;&#9472; PROBABILITIES &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</div>
+              <div class="term__box-body">
+                <pre class="term__prob" data-prob-display>  loading...</pre>
+              </div>
+              <div class="term__box-footer">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
